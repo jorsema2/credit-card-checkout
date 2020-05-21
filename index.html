@@ -1,0 +1,124 @@
+<!DOCTYPE HTML5>
+
+<html>
+    <head>
+        <title>Credit card checkout</title>
+        <link rel = "stylesheet" href = "style.css">
+        <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    </head>
+
+    <body>
+
+        
+        <div class = "flex-row space-around layout">
+
+            <!--left-half-->
+            <div class = "flex-center left-side">
+
+                <!-- Credit card-->
+                <div class = "credit-card flex-center">
+
+                    <!--Chip-->
+                    <div class = "chip">
+
+                    </div>
+                    <!--info-->
+                    <div class = "card-info">
+                        <!--card number-->
+                        <h2>4673 3456 1234 1234</h2>
+                        
+                        <div class = "flex-row space-between more-card-info">
+
+                            <div class = "flex-column">
+                                <p>CARD HOLDER</p>
+                                <h3>John Smith</h3>
+                            </div>
+
+                            <div class = "flex-column">
+                                <p>EXPIRES</p>
+                                <h3>07/20</h3>
+                            </div>
+
+                            <div class = "flex-column">
+                                <p>CVC</p>
+                                <h3>243</h3>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!--VISA logo-->
+                    <div class = "visa-div">
+                        <i class="fab fa-cc-visa"></i>
+                    </div>
+
+                </div>
+
+            </div>
+    
+            <!--right-half-->
+            <div class = "right-side">
+                <form class = "flex-column">
+                    <h2>Payment details</h2>
+                    <div class = "flex-column">
+                        <label for = "name">CARDHOLDER NAME</label>
+                        <div class = "flex-row">
+                            <i class="fas fa-user-check"></i>
+                            <input id = "name" class = " large-input">
+                        </div>
+                    </div>
+                    <div class = "flex-column">
+                        
+                        <label for = "card-number">CARD NUMBER</label>
+                        <div class = "flex-row">
+                            <i class="far fa-credit-card"></i>
+                            <input id = "card-number" class = " large-input">
+                        </div>
+                        
+                    </div>
+                    <div class = "flex-row space-between">
+                        <div class = "flex-column">
+                            
+                            <label for = "expiry-month">EXPIRY MONTH</label>
+                            <div class = "flex-row">
+                                <i class="far fa-calendar-alt"></i>
+                                <input id = "expiry-month">
+                            </div>
+                            
+                        </div>
+                        
+                        <div class = "flex-column">
+                            
+                            <label for = "expiry-year">EXPIRY YEAR</label>
+                            <div class = "flex-row">
+                                <i class="far fa-calendar-alt"></i>
+                                <input id = "expiry-year">
+                            </div>
+                            
+                        </div>
+
+                        <div class = "flex-column">
+
+                            <label for = "cvv">CVV</label>
+                            <div class = "flex-row">
+                                <i class="fas fa-lock"></i>
+                                <input id = "cvv">  
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class = "flex-center flex-column">
+
+                        <h4>Payment amount: <span id ="amount">34563€</span></h4>
+                        <button class = "button" type = "submit">PAY</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </body>
+</html>
