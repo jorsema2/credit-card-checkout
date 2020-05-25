@@ -197,7 +197,8 @@ input {
     right: 26px;
 }
 
-.far, .fas {
+.far,
+.fas {
     color: #fd435b;
     font-size: 18px;
     position: relative;
