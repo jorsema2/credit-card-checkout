@@ -35,6 +35,10 @@ input {
     width: 96px;
 }
 
+input.error {
+    background: red;
+}
+
 .flex-center {
     display: flex;
     align-items: center;

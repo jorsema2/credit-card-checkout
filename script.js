@@ -27,12 +27,12 @@ const date = new Date();
 
 // Object that to store validation results for each field:
 const isDataValid = {
-    isCardholder: "",
-    isCardNumber: "",
-    isExpiryMonth: "",
-    isExpiryYear: "",
-    isCvc: "",
-    isPaymentAmount: ""
+    cardholder: null,
+    cardNumber: null,
+    expiryMonth: null,
+    expiryYear: null,
+    cvc: null,
+    paymentAmount: null
 }
 
 // Functions that store data inputted by the user:
@@ -45,27 +45,35 @@ function setValue(key, value, targetElement){
 
 cardholder.onkeyup = function(event){
     setValue('cardholder', event.target.value, 'printed-name');
-    validateName();
+    validateField({
+        htmlElement: event.target, 
+        regex: /^[-a-zA-z\s]+$/, 
+        key: 'cardholder'
+    });
 }
 
-cardNumber.onkeyup = function(){
-    setValue('cardNumber', event.target.value, 'printed-number');
-    validateCardNum();
+cardNumber.onkeyup = function(event){
+    setValue('cardNumber', event.target.value.trim(), 'printed-number');
+    validateField({
+        htmlElement: event.target, 
+        regex: /^[0-9\s]+$/, 
+        key: 'cardNumber'
+    });
     splitNum(document.getElementById('printed-number').innerHTML);
 }
 
-expiryMonth.onkeyup = function(){
+expiryMonth.onkeyup = function(event){
     setValue('expiryMonth', event.target.value, 'printed-month');
     addSlashToDate();
 }
 
-expiryYear.onkeyup = function(){
+expiryYear.onkeyup = function(event){
     setValue('expiryYear', event.target.value, 'printed-year');
     addSlashToDate();
     deleteFirstTwo();
 }
 
-cvc.onkeyup = function(){
+cvc.onkeyup = function(event){
     setValue('cvc', event.target.value, 'printed-cvc');
 }
 
@@ -120,16 +128,38 @@ expiryYear.addEventListener('blur', function(event) {
 
 // All form validator functions:
 
-function validateName() {
+validateField({
+    htmlElement: event.target, 
+    regex: /^[-a-zA-z\s]+$/, 
+    key: 'cardholder'
+})
+
+
+function validateField(config){
+
+    const nameResult = config.regex.test(paymentDetails[config.key]);
+     if (paymentDetails[config.key] == '') {
+        return true;
+    } else if(nameResult === false) {
+        config.htmlElement.classList.add('error')
+        return false;
+    } else {
+        config.htmlElement.classList.remove('error');
+        isDataValid[config.key] = true;
+    }
+}
+
+function validateName(elem) {
     const nameRegExp = /^[-a-zA-z\s]+$/;
     const nameResult = nameRegExp.test(paymentDetails.cardholder);
     // The if statement prevents the alert to appear when the user deletes what he wrote in cardholder name input:
     if (paymentDetails.cardholder == '') {
         return true;
-    } else if(nameResult == false) {
-        alert('Please enter only letters for cardholder');
+    } else if(nameResult === false) {
+        elem.classList.add('error')
         return false;
     } else {
+        elem.classList.remove('error');
         isDataValid.isCardholder = true;
     }
 }
@@ -200,7 +230,11 @@ function isCardExpired() {
             paymentDetails.expiryYear = '20' + paymentDetails.expiryYear;
         }
 
-        if (paymentDetails.expiryMonth < month && paymentDetails.expiryYear <= year || paymentDetails.expiryYear < year) {
+        if(paymentDetails.expiryYear < year) {
+            alert('Your credit card has expired');
+        }
+
+        if (paymentDetails.expiryMonth < month && paymentDetails.expiryYear <= year) {
             alert('Your credit card has expired');
         } 
     }
@@ -234,7 +268,7 @@ cvc.addEventListener('blur', function(){
 // If all data is valid, enable pay-now-button:
 
 form.addEventListener('focusout', function(){
-    if (isDataValid.isCardholder == true && isDataValid.isCardNumber == true && isDataValid.isExpiryMonth == true && isDataValid.isExpiryYear == true && isDataValid.isCvc == true) {
+    if (isDataValid.cardholder && isDataValid.cardNumber && isDataValid.expiryMonth  && isDataValid.expiryYear && isDataValid.cvc) {
         document.getElementById("pay-now-button").style.backgroundColor = 'green';
         document.getElementById("pay-now-button").style.border = 'green';
         document.getElementById("pay-now-button").disabled = false;
