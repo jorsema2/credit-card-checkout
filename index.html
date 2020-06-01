@@ -3,144 +3,169 @@
 <html>
     <head>
         <title>Credit card checkout</title>
-        <link rel = "stylesheet" href = "CSS/style.css">
-        <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     </head>
 
     <body>
 
         
-        <div class = "flex-row space-around layout">
+        <div class="flex-row space-around layout">
 
             <!--left-half-->
-            <div class = "flex-center left-side">
+            <div class="flex-center left-side">
 
-                <!-- Credit card-->
-                <div class = "credit-card flex-center">
+                <!-- Credit card scene-->
+                <div class="scene flex-center">
 
-                    <!--Chip-->
-                    <div class = "chip">
-                        
-                        <div class = "chip-column flex-center"></div>
-                        <div class = "chip-row flex-center"></div>
+                    <!--Credit card-->
+                    <div id="flip-card" class="card">
+                        <!-- Card front-->
+                        <div class="front side flex-center">
 
-                    </div>
-
-                    <!--info-->
-                    <div class = "card-info">
-                        <!--card number-->
-                        <h2 class = "card-number" id = "printedNumber"></h2>
-                        
-                        <div class = "flex-row space-between more-card-info">
-
-                            <div class = "flex-column">
-                                <p class = "font-8px">CARD HOLDER</p>
-                                <p class = "font-16px" id = "printedName"></p>
+                            <!--Chip-->
+                            <div class="chip">
+                                
+                                <div class="chip-column flex-center"></div>
+                                <div class="chip-row flex-center"></div>
+        
                             </div>
-
-                            <div class = "flex-column">
-                                <p class = "font-8px">EXPIRES</p>
-                                <p class = "font-16px"><span id = "printedMonth"></span><span id ="printedYear"></span></p>
+        
+                            <!--info-->
+                            <div class="card-info flex-center flex-column">
+                                <!--card number-->
+                                <h2 class="card-number" id="printed-number"></h2>
+                                
+                                <div class="flex-row space-around more-card-info">
+        
+                                    <div class="flex-column">
+                                        <p class="font-8px">CARDHOLDER</p>
+                                        <p class="font-16px" id="printed-name"></p>
+                                    </div>
+        
+                                    <div class="flex-column">
+                                        <p class="font-8px">EXPIRES</p>
+                                        <p class="font-16px"><span id="printed-month"></span><span id="printed-year"></span></p>
+                                    </div>
+        
+                                </div>
+        
                             </div>
-
-                            <div class = "flex-column">
-                                <p class = "font-8px">CVC</p>
-                                <p id = "printedCvc" class = "font-16px"></p>
+        
+                            <!--Triangles-->
+                            <div class="triangles flex-row">
+        
+                                <div class="gradient left-triangle"></div>
+                            
+                                <div class="right-triangle"></div>
+        
                             </div>
-
+        
+                            <!--VISA logo-->
+                            <div class="visa-div">
+                                <i class="fab fa-cc-visa"></i>
+                            </div>
+        
                         </div>
 
-                    </div>
+                        <!--Card back-->
+                        <div class="back side flex-center">
+                            <div class="cvc">
+                                <div class="flex-column">
+                                    <p class="font-8px">CVC</p>
 
-                    <!--Triangles-->
-                    <div class = "triangles flex-row">
+                                    <div class = "cvc-box flex-center">
 
-                        <div class = "gradient left-triangle"></div>
-                    
-                        <div class = "right-triangle"></div>
+                                        <p id="printed-cvc" class="font-16px"></p>
 
-                    </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>                 
+                        </div>
 
-                    <!--VISA logo-->
-                    <div class = "visa-div">
-                        <i class="fab fa-cc-visa"></i>
                     </div>
 
                 </div>
+                  
 
-                <!--Credit card back-->
-                <div class = "credit-card-back"></div>
-            </div>
+                <!--Credit card back mirrored-->
+                <div class="credit-card-mirror"></div>
 
-            <!--Concentric circles-->
+                <!--Concentric circles-->
+                <div class="big-circle">
+                    <div class="small-circle flex-center"></div>
+                </div>
 
-            <div class = "big-circle">
-                <div class = "small-circle flex-center"></div>
+                
+                
+
             </div>
 
             <!--right-half-->
-            <div class = "right-side">
-                <form class = "flex-column" autocomplete = "off">
-                    <h2 class = "font-20px">Payment details</h2>
-                    <div class = "flex-column">
-                        <label for = "cardholder">CARDHOLDER NAME</label>
-                        <div class = "flex-row">
+            <div class="right-side">
+                <form id='form' class="flex-column" autocomplete = "off">
+                    <h2 class="font-20px">Payment details</h2>
+                    <div class="flex-column">
+                        <label for="cardholder">CARDHOLDER NAME</label>
+                        <div class="flex-row">
                             <i class="fas fa-user-check"></i>
-                            <input id="cardholder" class="large-input cardholder-input" type="text" pattern="[A-Za-z ]+" title="Use only letters and spaces." required>
+                            <input id="cardholder" class="large-input cardholder-input" type="text" required>
                         </div>
                     </div>
-                    <div class = "flex-column">
+                    <div class="flex-column">
                         
-                        <label for = "cardNumber">CARD NUMBER</label>
-                        <div class = "flex-row">
+                        <label for="card-number">CARD NUMBER</label>
+                        <div class="flex-row">
                             <i class="far fa-credit-card"></i>
-                            <input id = "cardNumber" class = "large-input" type = "number" maxlength = "16" minlength = "16" min = "0" required>
+                            <input id="card-number" class="large-input" type="text" required>
                         </div>
                         
                     </div>
-                    <div class = "flex-row space-between">
-                        <div class = "flex-column">
+                    <div class="flex-row space-between">
+                        <div class="flex-column">
                             
-                            <label for = "expiryMonth">EXPIRY MONTH</label>
-                            <div class = "flex-row">
+                            <label for="expiry-month">EXPIRY MONTH</label>
+                            <div class="flex-row">
                                 <i class="far fa-calendar-alt"></i>
-                                <input id = "expiryMonth" type = "number" maxlength = "2" min = "1" max = "12" required>
+                                <input id="expiry-month" type="text" required>
                             </div>
                             
                         </div>
                         
-                        <div class = "flex-column">
+                        <div class="flex-column">
                             
-                            <label for = "expiryYear">EXPIRY YEAR</label>
-                            <div class = "flex-row">
+                            <label for="expiry-year">EXPIRY YEAR</label>
+                            <div class="flex-row">
                                 <i class="far fa-calendar-alt"></i>
-                                <input id = "expiryYear" type = "number" maxlength = "2" min = "0" max = "99" required>
+                                <input id="expiry-year" type="text" required>
                             </div>
                             
                         </div>
 
-                        <div class = "flex-column">
+                        <div class="flex-column">
 
-                            <label for = "cvc">CVC</label>
-                            <div class = "flex-row">
+                            <label for="cvc">CVC</label>
+                            <div class="flex-row">
                                 <i class="fas fa-lock"></i>
-                                <input id = "cvc" type = "number" maxlength = "3" minlength = "3" required>  
+                                <input id="cvc" type="text" required>  
                             </div>
                             
                         </div>
                         
                     </div>
                     
-                    <div class = "flex-center flex-column">
+                    <div class="flex-center flex-column">
 
-                        <h4 class = "font-18px">Payment amount: <span id ="paymentAmount" class = "amount">34 563€</span></h4>
-                        <button class = "button" id='pay-now-button' type = "submit">PAY</button>
+                        <h4 class="font-18px">Payment amount: <span id="payment-amount" class="amount">34 563€</span></h4>
+                        <button class="button" id='pay-now-button' type="submit">PAY</button>
 
                     </div>
                 </form>
             </div>
         </div>
 
-        <script src = "script.js"></script>
+        <script src="script.js"></script>
+
     </body>
 </html>

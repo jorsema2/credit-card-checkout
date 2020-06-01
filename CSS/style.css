@@ -13,159 +13,6 @@
     src: url(/Resources/ShareTechMono-Regular.ttf)
 }
 
-
-.layout {
-    font-family: "Open Sans Light";
-    height: 512px;
-    margin: 48px 96px;
-}
-
-.left-side {    
-    width: 512px;
-}
-
-.credit-card {
-    background-color: #fd435b;
-    border-radius: 16px;
-    box-shadow: 2px 4px 32px lightgrey;
-    color: #FEFEFE;
-    height: 192px;
-    margin-bottom: 178px;
-    padding: 40px;
-    position: relative;
-    top: 64px;
-    width: 344px;
-    z-index: 3;
-}
-
-.chip {
-    background: linear-gradient(to right, #b8a376, #e7d8b5 35%, #d8c79c);
-    border-radius: 2px;
-    height: 28px;
-    left: 36px;
-    position: absolute;
-    top: 84px;
-    width: 38px;
-    z-index: 4;    
-}
-
-.chip-column {
-    border: 1px solid gray;
-    border-bottom: none;
-    border-radius: 32%;
-    border-top: none;
-    height: 28px;
-    margin-left: 10px;
-    position: absolute;
-    width: 16px;
-    z-index: 6;
-}
-
-.chip-row {
-    border: 1px solid gray;
-    border-left: none;
-    border-right: none;
-    height: 8px;
-    margin-top: 9px;
-    position: absolute;    
-    width: 38px;
-    z-index: 5;
-}
-
-.card-info {
-    line-height: 40px;
-    margin: 104px 0px 0px 80px;
-    width: inherit;
-    z-index: 5;
-}
-
-.more-card-info {
-    line-height: 0;
-    margin-right: 72px;
-}
-
-.card-number {
-    font-family: "Share Tech Mono", monospace;
-    font-size: 20px;
-    letter-spacing: 6px;
-    width: inherit;
-}
-
-.triangles {
-    background: linear-gradient(to right, #FE6073 0%, #FE6073 20%, #fd435b 50%, #FE6073 50%, #fd435b 100%);
-    bottom: 56px;
-    position: absolute;
-    width: 272px;
-    z-index: 4;
-}
-
-.left-triangle {
-    border-top: 84px solid #fd435b;
-    border-right: 136px solid transparent;
-    border-bottom: 84px solid #fd435b;
-}
-
-.right-triangle {
-    border-top: 84px solid #fd435b;
-    border-left: 136px solid transparent;
-    border-bottom: 84px solid #fd435b;
-}
-
-.visa-div {
-    align-self: flex-start;
-    bottom: 20px;
-    background: linear-gradient(to right, #fd435b, #FEFEFE 5%, #FEFEFE 95%, #fd435b);
-    height: 48px;
-    position: relative;
-    right: 72px;
-    z-index: 5;   
-}
-
-.fa-cc-visa {
-    color: #fd435b;
-    font-size: 80px;
-    position: relative;
-    bottom: 8px;
-}
-
-.big-circle {
-    border: 1px solid #fd5f72;
-    border-radius: 100%;
-    height: 480px; 
-    left: 12px;
-    top: 128px;
-    position: absolute;
-    width: 480px;
-    z-index: 2;
-}
-
-.small-circle {
-    border: 1px solid #f85f70;
-    border-radius: 100%;
-    height: 176px; 
-    margin: 144px 0px 0px 144px;
-    position: absolute;
-    width: 176px;
-    z-index: 2;
-}
-
-.credit-card-back {
-    background: linear-gradient(to bottom, #E5DFE1, #F4F3F8 56px, #E8E6E9 56px, #E8E6E9 120px, #F4F3F8);
-    border: none;
-    border-radius: 14px;
-    box-shadow: 4px 12px 48px lightgrey;
-    height: 280px;
-    left: 232px;
-    position: absolute;
-    top: 184px;
-    width: 424px;
-    z-index: 1;
-}
-
-.right-side {
-    height: 512px;
-}
-
 form {
     height: 512px;
     justify-content: space-between;
@@ -186,41 +33,6 @@ input {
     right: 20px;
     text-indent: 24px;
     width: 96px;
-}
-
-.large-input {
-    right: 24px;
-    width: 400px;
-}
-
-.cardholder-input {
-    right: 26px;
-}
-
-.far,
-.fas {
-    color: #fd435b;
-    font-size: 18px;
-    position: relative;
-    top: 2px;
-    z-index: 10;
-}
-
-.amount {
-    color: #fd435b;
-    font-size: 22px;
-    margin-left: 12px;
-    text-indent: 16px;
-}
-
-.button {
-    border-radius: 8px;
-    border-color: #fd435b;
-    background-color: #fd435b;
-    color: #FEFEFE;
-    font-size: 22px;
-    margin: 32px;
-    padding: 16px 96px;
 }
 
 .flex-center {
@@ -265,4 +77,247 @@ input {
 
 .font-20px {
     font-size: 20px;   
+}
+
+.layout {
+    font-family: "Open Sans Light";
+    height: 512px;
+    margin: 48px 96px;
+    min-width: 1040px;
+    width: auto;
+}
+
+.left-side {
+    width: 512px;
+}
+
+.scene {
+    background-color: transparent;
+    height: 192px;
+    left: 24px;
+    margin-bottom: 178px;
+    padding: 40px;
+    perspective: 800px;
+    position: relative;
+    top: 64px;
+    width: 344px;
+    z-index: 3;
+}
+
+.card {
+    border-radius: 16px;
+    box-shadow: 2px 4px 32px lightgrey;
+    height: inherit;
+    padding: 40px;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: 0.5s;
+    width: inherit;
+    z-index: 3;
+}
+
+.side {
+    backface-visibility: hidden;
+    border-radius: 16px;
+    box-shadow: 2px 4px 32px lightgrey;
+    height: inherit;
+    padding: 40px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: inherit;
+    z-index: 4;
+}
+
+.front {
+    background-color: #fd435b;
+    color: #FEFEFE;
+}
+
+.back {
+    background: linear-gradient(to bottom, #E5DFE1, #F4F3F8 56px, #E8E6E9 56px, #E8E6E9 120px, #F4F3F8 120px, #F4F3F8);
+    transform: rotateY(180deg);
+}
+
+.flip {
+    transform: rotateY(180deg);
+}
+
+.chip {
+    background: linear-gradient(to right, #b8a376, #e7d8b5 35%, #d8c79c);
+    border-radius: 2px;
+    height: 28px;
+    left: 40px;
+    position: absolute;
+    top: 84px;
+    width: 38px;
+    z-index: 5;
+} 
+
+.chip-column {
+    background: linear-gradient(to right, #e7d8b5, #d8c79c);
+    border: 1px solid gray;
+    border-bottom: none;
+    border-radius: 32%;
+    border-top: none;
+    height: 28px;
+    margin-left: 10px;
+    position: absolute;
+    width: 16px;
+    z-index: 6;
+}
+
+.chip-row {
+    border: 1px solid gray;
+    border-left: none;
+    border-right: none;
+    height: 8px;
+    margin-top: 9px;
+    position: absolute;    
+    width: 38px;
+    z-index: 5;
+}
+
+.card-info {
+    line-height: 40px;
+    margin: 104px 0px 0px 80px;
+    width: inherit;
+    z-index: 5;
+}
+
+.more-card-info {
+    line-height: 0;
+    margin-left: 80px;
+    width: 204px;
+}
+
+.card-number {
+    font-family: "Share Tech Mono", monospace;
+    font-size: 20px;
+    letter-spacing: 6px;
+    margin-left: 272px;
+    width: inherit;
+}
+
+.triangles {
+    background: linear-gradient(to right, #FE6073 0%, #FE6073 20%, #fd435b 50%, #FE6073 50%, #fd435b 100%);
+    position: relative;
+    right: 168px;
+    z-index: 4;
+}
+
+.left-triangle {
+    border-top: 84px solid #fd435b;
+    border-right: 136px solid transparent;
+    border-bottom: 84px solid #fd435b;
+}
+
+.right-triangle {
+    border-top: 84px solid #fd435b;
+    border-left: 136px solid transparent;
+    border-bottom: 84px solid #fd435b;
+}
+
+.visa-div {
+    align-self: flex-start;
+    bottom: 20px;
+    background: linear-gradient(to right, #fd435b, #FEFEFE 5%, #FEFEFE 95%, #fd435b);
+    height: 48px;
+    position: relative;
+    right: 208px;
+    z-index: 5;   
+}
+
+.fa-cc-visa {
+    color: #fd435b;
+    font-size: 80px;
+    position: relative;
+    bottom: 8px;
+}
+
+.cvc {
+    top: 28px;
+    position: relative;
+    left: 64px;
+}
+
+.cvc-box {
+    background-color: white;
+    border: 1px solid gray;
+    color: black;
+    height: 32px;
+    width: 64px;
+}
+
+.credit-card-mirror {
+    background: linear-gradient(to bottom, #E5DFE1, #F4F3F8 56px, #E8E6E9 56px, #E8E6E9 120px, #F4F3F8 120px, #F4F3F8);
+    border: none;
+    border-radius: 14px;
+    box-shadow: 4px 12px 48px lightgrey;
+    height: 280px;
+    left: 18%;
+    position: absolute;
+    bottom: 25%;
+    width: 424px;
+    z-index: 1;
+}
+
+.big-circle {
+    border: 1px solid #fd5f72;
+    border-radius: 100%;
+    height: 480px; 
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    width: 480px;
+    z-index: 2;
+}
+
+.small-circle {
+    border: 1px solid #f85f70;
+    border-radius: 100%;
+    height: 176px; 
+    margin: 32% auto;
+    position: relative;
+    width: 176px;
+    z-index: 2;
+}
+
+.right-side {
+    height: 512px;
+}
+
+.large-input {
+    right: 24px;
+    width: 400px;
+}
+
+.cardholder-input {
+    right: 26px;
+}
+
+.far,
+.fas {
+    color: #fd435b;
+    font-size: 18px;
+    position: relative;
+    top: 2px;
+    z-index: 10;
+}
+
+.amount {
+    color: #fd435b;
+    font-size: 22px;
+    margin-left: 12px;
+    text-indent: 16px;
+}
+
+.button {
+    border-radius: 8px;
+    border-color: #fd435b;
+    background-color: #fd435b;
+    color: #FEFEFE;
+    font-size: 22px;
+    margin: 32px;
+    padding: 16px 96px;
 }
