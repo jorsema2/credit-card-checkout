@@ -1,16 +1,16 @@
 @font-face {
     font-family: "Open Sans Light";
-    src: url(/Resources/OpenSans-Light.ttf);
+    src: url(/assets/resources/OpenSans-Light.ttf);
 }
 
 @font-face {
     font-family: "Open Sans Regular";
-    src: url(/Resources/OpenSans-Regular.ttf);
+    src: url(/assets/resources/OpenSans-Regular.ttf);
 }
 
 @font-face {
     font-family: "Share Tech Mono";
-    src: url(/Resources/ShareTechMono-Regular.ttf)
+    src: url(/assets/resources/ShareTechMono-Regular.ttf)
 }
 
 form {
