@@ -36,7 +36,8 @@ input {
 }
 
 input.error {
-    background: red;
+    background: #f55467;
+    border-radius: 3px;
 }
 
 .flex-center {

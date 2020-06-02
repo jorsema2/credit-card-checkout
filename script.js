@@ -17,7 +17,6 @@ const paymentDetails = {
     expiryMonth: "",
     expiryYear: "",
     cvc: "",
-    paymentAmount: ""
 }
 
 // Assingments necessary for validation:
@@ -29,10 +28,11 @@ const date = new Date();
 const isDataValid = {
     cardholder: null,
     cardNumber: null,
+    cardNumberLength: null,
     expiryMonth: null,
     expiryYear: null,
     cvc: null,
-    paymentAmount: null
+    expirationDate: null
 }
 
 // Functions that store data inputted by the user:
@@ -53,28 +53,45 @@ cardholder.onkeyup = function(event){
 }
 
 cardNumber.onkeyup = function(event){
-    setValue('cardNumber', event.target.value.trim(), 'printed-number');
+    cardNumber.value = cardNumber.value.trim();
+    setValue('cardNumber', event.target.value, 'printed-number');
     validateField({
         htmlElement: event.target, 
-        regex: /^[0-9\s]+$/, 
+        regex: /^[0-9]+$/, 
         key: 'cardNumber'
     });
     splitNum(document.getElementById('printed-number').innerHTML);
+    console.log(paymentDetails.cardNumber);
 }
 
 expiryMonth.onkeyup = function(event){
     setValue('expiryMonth', event.target.value, 'printed-month');
+    validateField({
+        htmlElement: event.target, 
+        regex: /^([1-9]|0[1-9]|1[012])$/, 
+        key: 'expiryMonth'
+    });
     addSlashToDate();
 }
 
 expiryYear.onkeyup = function(event){
     setValue('expiryYear', event.target.value, 'printed-year');
+    validateField({
+        htmlElement: event.target, 
+        regex: /^([0-9][0-9]|20[0-9][0-9])$/, 
+        key: 'expiryYear'
+    });
     addSlashToDate();
     deleteFirstTwo();
 }
 
 cvc.onkeyup = function(event){
     setValue('cvc', event.target.value, 'printed-cvc');
+    validateField({
+        htmlElement: event.target, 
+        regex: /^([0-9]{3})$/, 
+        key: 'cvc'
+    });
 }
 
 // Capitalize first letter of each name:
@@ -112,36 +129,33 @@ function deleteFirstTwo() {
 
 cardNumber.addEventListener('blur', function(event) {
     if (cardNumber.value.length !== 16 && cardNumber.value !== '') {
-        alert('Card number must have 16 numbers');
+        cardNumber.classList.add('error');
+        isDataValid.cardNumberLength = false;
+    } else {
+        cardNumber.classList.remove('error');
+        isDataValid.cardNumberLength = true;
     }
 });
 
 expiryMonth.addEventListener('blur', function(event) {
-    validateMonth();
     isCardExpired();
 }, true);
 
 expiryYear.addEventListener('blur', function(event) {
-    validateYear();
     isCardExpired();
 }, true);
 
 // All form validator functions:
 
-validateField({
-    htmlElement: event.target, 
-    regex: /^[-a-zA-z\s]+$/, 
-    key: 'cardholder'
-})
-
-
 function validateField(config){
 
-    const nameResult = config.regex.test(paymentDetails[config.key]);
-     if (paymentDetails[config.key] == '') {
+    const validationResult = config.regex.test(paymentDetails[config.key]);
+    if (paymentDetails[config.key] == '') {
+        config.htmlElement.classList.remove('error');
         return true;
-    } else if(nameResult === false) {
+    } else if(validationResult === false) {
         config.htmlElement.classList.add('error')
+        isDataValid[config.key] = false;
         return false;
     } else {
         config.htmlElement.classList.remove('error');
@@ -149,77 +163,6 @@ function validateField(config){
     }
 }
 
-function validateName(elem) {
-    const nameRegExp = /^[-a-zA-z\s]+$/;
-    const nameResult = nameRegExp.test(paymentDetails.cardholder);
-    // The if statement prevents the alert to appear when the user deletes what he wrote in cardholder name input:
-    if (paymentDetails.cardholder == '') {
-        return true;
-    } else if(nameResult === false) {
-        elem.classList.add('error')
-        return false;
-    } else {
-        elem.classList.remove('error');
-        isDataValid.isCardholder = true;
-    }
-}
-
-function validateCardNum() {
-    const numRegExp = /^[0-9\s]+$/;
-    const numResult = numRegExp.test(paymentDetails.cardNumber);
-    // The if statement prevents the alert to appear when the user deletes what he wrote in cardholder name input:
-    if (paymentDetails.cardNumber == '') {
-        return true;
-    } else if(numResult == false) {
-        alert('Please enter only numbers for card number');
-        return false;
-    } else {
-        isDataValid.isCardNumber = true;
-    }
-}
-
-function validateMonth() {
-    const monthRegExp = /^([1-9]|0[1-9]|1[012])$/;
-    const monthResult = monthRegExp.test(paymentDetails.expiryMonth);
-    // The if statement prevents the alert to appear when the user deletes what he wrote in cardholder name input:
-    if (paymentDetails.expiryMonth == '') {
-        return true;
-    } else if (monthResult == false) {
-        alert('Please enter only numbers between 1 and 12');
-        return false;
-    } else {
-        isDataValid.isExpiryMonth = true;
-    }
-}
-
-function validateYear() {
-    const yearRegExp = /^([0-9][0-9]|20[0-9][0-9])$/;
-    const yearResult = yearRegExp.test(paymentDetails.expiryYear);
-    // The if statement prevents the alert to appear when the user deletes what he wrote in cardholder name input:
-    if(paymentDetails.expiryYear == '') {
-        return true;
-    } else if (yearResult == false) {
-        alert('Please enter only years from 2020');
-        return false;
-    } else {
-        isDataValid.isExpiryYear = true;
-    }
-}
-
-/*
-Weird bug here:
-- Bug loop appears when isCardExpired is false and user moves from month input box to year input box or viceversa directly.
-
-Example to provoke this bug:
-
-1) Write 02 in month
-2) Write 19 or 2019 in year
-3) Get an error ('Your credit card has expired)
-4) Next thing you do after accepting error message is to click in month input box and then clink in year input box. Viceversa also works (first click in year input, then click in month input)
-5) Error message loop starts
-
-To escape the loop, refresh page and then accept the error message
-*/
 function isCardExpired() {
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
@@ -230,27 +173,19 @@ function isCardExpired() {
             paymentDetails.expiryYear = '20' + paymentDetails.expiryYear;
         }
 
-        if(paymentDetails.expiryYear < year) {
-            alert('Your credit card has expired');
+        if (paymentDetails.expiryYear < year) {
+            expiryMonth.classList.add('error');
+            expiryYear.classList.add('error');
+            isDataValid.expirationDate = false;
+        } else if (paymentDetails.expiryMonth < month && paymentDetails.expiryYear <= year) {
+            expiryMonth.classList.add('error');
+            expiryYear.classList.add('error');
+            isDataValid.expirationDate = false;
+        } else {
+            expiryMonth.classList.remove('error');
+            expiryYear.classList.remove('error');
+            isDataValid.expirationDate = true;
         }
-
-        if (paymentDetails.expiryMonth < month && paymentDetails.expiryYear <= year) {
-            alert('Your credit card has expired');
-        } 
-    }
-}
-
-function validateCvc() {
-    const cvcRegExp = /^([0-9]{3})$/;
-    const cvcResult = cvcRegExp.test(paymentDetails.cvc);
-    // The if statement prevents the alert to appear when the user deletes what he wrote in cardholder name input:
-    if (paymentDetails.cvc == '') {
-        return true;
-    } else if (cvcResult == false) {
-        alert('Please enter only numbers between "000" and "999"');
-        return false;
-    } else {
-        isDataValid.isCvc = true;
     }
 }
 
@@ -267,11 +202,15 @@ cvc.addEventListener('blur', function(){
 
 // If all data is valid, enable pay-now-button:
 
-form.addEventListener('focusout', function(){
-    if (isDataValid.cardholder && isDataValid.cardNumber && isDataValid.expiryMonth  && isDataValid.expiryYear && isDataValid.cvc) {
+form.addEventListener('focusout', function() {
+    if (isDataValid.cardholder && isDataValid.cardNumber && isDataValid.cardNumberLength && isDataValid.expiryMonth  && isDataValid.expiryYear && isDataValid.cvc && isDataValid.expirationDate) {
         document.getElementById("pay-now-button").style.backgroundColor = 'green';
         document.getElementById("pay-now-button").style.border = 'green';
         document.getElementById("pay-now-button").disabled = false;
+    } else {
+        document.getElementById("pay-now-button").style.backgroundColor = '';
+        document.getElementById("pay-now-button").style.border = '';
+        document.getElementById("pay-now-button").disabled = true;
     }
 })
 
