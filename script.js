@@ -53,6 +53,8 @@ cardholder.onkeyup = function(event){
 }
 
 cardNumber.onkeyup = function(event){
+    console.log(event.target.value.length === 16)
+    if(event.target.value.length > 16) return;
     cardNumber.value = cardNumber.value.trim();
     setValue('cardNumber', event.target.value, 'printed-number');
     validateField({

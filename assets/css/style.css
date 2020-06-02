@@ -1,3 +1,47 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
 @font-face {
     font-family: "Open Sans Light";
     src: url(/assets/resources/OpenSans-Light.ttf);
@@ -11,6 +55,10 @@
 @font-face {
     font-family: "Share Tech Mono";
     src: url(/assets/resources/ShareTechMono-Regular.ttf)
+}
+
+body {
+    margin: 0;
 }
 
 form {
@@ -86,26 +134,21 @@ input.error {
 
 .layout {
     font-family: "Open Sans Light";
-    height: 512px;
-    margin: 48px 96px;
-    max-height: 1040px;
-    min-width: 1040px;
-    width: auto;
+    width: 100vw;
+    height: 100vh;
 }
 
-.left-side {
-    width: 512px;
+.column {
+    width: 50%;
+    height: 100%;
+    position: relative;
 }
 
 .scene {
     background-color: transparent;
     height: 192px;
-    left: 24px;
-    margin-bottom: 178px;
-    padding: 40px;
     perspective: 800px;
     position: relative;
-    top: 64px;
     width: 344px;
     z-index: 3;
 }
@@ -242,8 +285,8 @@ input.error {
 }
 
 .cvc {
-    top: 28px;
     position: relative;
+    top: 28px;
     left: 64px;
 }
 
@@ -261,21 +304,24 @@ input.error {
     border-radius: 14px;
     box-shadow: 4px 12px 48px lightgrey;
     height: 280px;
-    left: 18%;
-    position: absolute;
-    bottom: 25%;
     width: 424px;
+    position: absolute;
     z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-40%, -40%);
 }
 
 .big-circle {
     border: 1px solid #fd5f72;
     border-radius: 100%;
     height: 480px; 
-    left: 0;
-    bottom: 0;
-    position: absolute;
     width: 480px;
+    left: 50%;
+    top: 50%;
+    position: absolute;
+    transform: translate(-80%, -20%);
+   
     z-index: 2;
 }
 
@@ -283,14 +329,10 @@ input.error {
     border: 1px solid #f85f70;
     border-radius: 100%;
     height: 176px; 
+    width: 176px;
     margin: 32% auto;
     position: relative;
-    width: 176px;
     z-index: 2;
-}
-
-.right-side {
-    height: 512px;
 }
 
 .large-input {
