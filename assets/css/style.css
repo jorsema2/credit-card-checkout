@@ -88,6 +88,7 @@ input.error {
     font-family: "Open Sans Light";
     height: 512px;
     margin: 48px 96px;
+    max-height: 1040px;
     min-width: 1040px;
     width: auto;
 }
